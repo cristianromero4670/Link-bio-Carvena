@@ -18,7 +18,7 @@
 html{scroll-behavior:smooth;}
 body{
   margin:0;
-  background: rgba(255, 255, 255, 1);
+  background:var(--cream);
   color:var(--ink);
   font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
@@ -291,7 +291,11 @@ footer{
   .menu-nav button.active::before{ transform:translateX(-50%) scale(1); }
   .art-frame{ width:68px; height:68px; padding:0.45rem; }
   .logo-img{ width:120px; }
-  .bg-art{ display:none; }
+  .bg-art{ opacity:0.45; }
+  .bg-art.pizza-bg{ width:36%; right:0.5rem; bottom:0.5rem; }
+  .bg-art.bottle-bg{ width:28%; right:0.5rem; top:0.8rem; }
+  .bg-art.glasses-bg{ width:30%; right:0.5rem; bottom:0.5rem; }
+  .bg-art.grapes-bg{ width:30%; left:0.5rem; bottom:0.5rem; }
 
   /* La barra de categorías queda fija (sticky) arriba en móvil, así que
      cada sección necesita más aire arriba para no quedar tapada al saltar. */
