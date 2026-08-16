@@ -1,5 +1,5 @@
 :root{
-  --cream:#FFFFFF;
+  --cream:#FBF8F3;
   --cream-2:#F3ECDF;
   --ink:#4A3826;
   --ink-70:rgba(74,56,38,0.68);
@@ -60,7 +60,37 @@ a{color:inherit; text-decoration:none;}
   height:auto;
   margin:0 auto 0.4rem;
   display:block;
+  position:relative;
+  z-index:2;
   mix-blend-mode:multiply;
+}
+.corner-art{
+  position:absolute;
+  top:-8px;
+  width:150px;
+  height:auto;
+  mix-blend-mode:multiply;
+  pointer-events:none;
+  z-index:1;
+}
+.corner-art.olivo{ left:-24px; }
+.corner-art.tomates{ right:-24px; }
+.tagline{
+  font-family:var(--mono);
+  font-size:0.62rem;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--olive);
+  margin:0.3rem 0 0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.5rem;
+}
+.tagline::before, .tagline::after{
+  content:"•";
+  color:var(--brick);
+  font-size:0.55rem;
 }
 .sr-only{
   position:absolute;
@@ -138,55 +168,59 @@ main{
   padding-bottom:45vh;
 }
 .category{
-  padding-top:2.4rem;
+  padding-top:2.8rem;
   scroll-margin-top:1.5rem;
-  border-top:1px solid var(--line);
+  position:relative;
 }
-.category:first-child{ border-top:none; padding-top:0; }
+.category:first-child{ padding-top:0; }
 
-.category-head{
-  margin-bottom:1.6rem;
-}
+/* El texto siempre va por encima del arte de fondo */
+.category-head, .dish, .subgroup-title{ position:relative; z-index:2; }
 
-/* Ilustraciones de fondo: grandes, detrás del contenido, dan ambiente
-   a toda la sección en vez de ser un ícono pegado al título (como en
-   el menú físico original).
-   - position:absolute + inset positivo (nunca negativo) => la imagen
-     siempre queda completamente dentro del área de la sección, nunca
-     se recorta.
-   - mix-blend-mode:multiply => el blanco de fondo de la imagen se
-     funde con el fondo de la página, sin recuadro ni cambio de color
-     visible entre ambos. */
-.category{ position:relative; }
-.category-head, .dish, .subgroup-title{ position:relative; z-index:1; }
-
+/* Ilustraciones de fondo temáticas: dan ambiente a la sección y llenan
+   el aire que queda al final de la lista de platillos, en vez de dejar
+   un vacío. Nunca se recortan (siempre caben dentro de la sección) y
+   el blanco de su fondo se funde con la página gracias a multiply. */
 .bg-art{
   position:absolute;
-  z-index:0;
-  opacity:0.85;
+  z-index:1;
+  opacity:0.9;
   mix-blend-mode:multiply;
   pointer-events:none;
   height:auto;
 }
 .bg-art.pizza-bg{
-  width:min(300px, 34%);
-  right:1rem;
-  bottom:1rem;
+  width:min(260px, 36%);
+  right:0.5rem;
+  bottom:0.5rem;
 }
 .bg-art.bottle-bg{
-  width:min(190px, 24%);
-  right:1rem;
-  top:1.5rem;
+  width:min(170px, 24%);
+  right:0.5rem;
+  top:0.5rem;
 }
 .bg-art.glasses-bg{
-  width:min(210px, 26%);
-  right:1rem;
-  bottom:1rem;
+  width:min(190px, 27%);
+  right:0.5rem;
+  bottom:0.5rem;
 }
 .bg-art.grapes-bg{
-  width:min(210px, 26%);
-  left:1rem;
-  bottom:1rem;
+  width:min(180px, 25%);
+  left:0.5rem;
+  bottom:0.5rem;
+}
+
+/* Cuando una sección lleva arte de fondo, el texto le hace espacio
+   (columna más angosta) para que no se sienta apretado contra la
+   ilustración: esto es lo que genera el "aire" entre texto e imagen. */
+@media (min-width:821px){
+  .category.has-side-art .dish{ max-width:62%; }
+  #vino.has-side-art .dish{ margin:0 auto; }
+}
+
+.category-head{
+  text-align:center;
+  margin-bottom:1.8rem;
 }
 
 .eyebrow{
@@ -201,8 +235,32 @@ main{
 .category-title{
   font-family:var(--serif);
   font-weight:600;
-  font-size:clamp(1.5rem, 3vw, 2rem);
-  margin:0;
+  font-size:clamp(1.6rem, 5vw, 2.1rem);
+  margin:0 0 1rem;
+}
+
+/* Divisor ornamental centrado, como en el menú de referencia: dos
+   líneas punteadas cortas flanqueando el sprig de romero. */
+.divider{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:0.7rem;
+  width:100%;
+  max-width:260px;
+  margin:0 auto;
+}
+.divider::before, .divider::after{
+  content:"";
+  flex:1;
+  height:0;
+  border-top:1px dotted var(--line);
+}
+.divider img{
+  width:64px;
+  height:auto;
+  flex-shrink:0;
+  mix-blend-mode:multiply;
 }
 
 .subgroup-title{
@@ -289,13 +347,15 @@ footer{
   .menu-nav button{ padding:0.3rem 0; flex:0 0 auto; }
   .menu-nav button::before{ left:50%; top:auto; bottom:-0.35rem; transform:translateX(-50%) scale(0); }
   .menu-nav button.active::before{ transform:translateX(-50%) scale(1); }
-  .art-frame{ width:68px; height:68px; padding:0.45rem; }
   .logo-img{ width:120px; }
-  .bg-art{ opacity:0.45; }
-  .bg-art.pizza-bg{ width:36%; right:0.5rem; bottom:0.5rem; }
-  .bg-art.bottle-bg{ width:28%; right:0.5rem; top:0.8rem; }
-  .bg-art.glasses-bg{ width:30%; right:0.5rem; bottom:0.5rem; }
-  .bg-art.grapes-bg{ width:30%; left:0.5rem; bottom:0.5rem; }
+  .corner-art{ width:108px; top:-4px; }
+  .corner-art.olivo{ left:-18px; }
+  .corner-art.tomates{ right:-18px; }
+  .bg-art{ opacity:0.5; }
+  .bg-art.pizza-bg{ width:34%; }
+  .bg-art.bottle-bg{ width:26%; }
+  .bg-art.glasses-bg{ width:28%; }
+  .bg-art.grapes-bg{ width:26%; }
 
   /* La barra de categorías queda fija (sticky) arriba en móvil, así que
      cada sección necesita más aire arriba para no quedar tapada al saltar. */
