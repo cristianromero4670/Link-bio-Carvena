@@ -66,15 +66,15 @@ a{color:inherit; text-decoration:none;}
 }
 .corner-art{
   position:absolute;
-  top:-8px;
-  width:150px;
-  height:auto;
+  top:0;
+  height:100%;
+  width:auto;
   mix-blend-mode:multiply;
   pointer-events:none;
   z-index:1;
 }
-.corner-art.olivo{ left:-24px; }
-.corner-art.tomates{ right:-24px; }
+.corner-art.olivo{ left:-10px; }
+.corner-art.tomates{ right:-10px; }
 .tagline{
   font-family:var(--mono);
   font-size:0.62rem;
@@ -348,9 +348,6 @@ footer{
   .menu-nav button::before{ left:50%; top:auto; bottom:-0.35rem; transform:translateX(-50%) scale(0); }
   .menu-nav button.active::before{ transform:translateX(-50%) scale(1); }
   .logo-img{ width:120px; }
-  .corner-art{ width:108px; top:-4px; }
-  .corner-art.olivo{ left:-18px; }
-  .corner-art.tomates{ right:-18px; }
   .bg-art{ opacity:0.5; }
   .bg-art.pizza-bg{ width:34%; }
   .bg-art.bottle-bg{ width:26%; }
