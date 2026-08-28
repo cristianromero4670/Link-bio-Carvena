@@ -170,57 +170,15 @@ main{
 .category{
   padding-top:2.8rem;
   scroll-margin-top:1.5rem;
-  position:relative;
 }
 .category:first-child{ padding-top:0; }
-
-/* El texto siempre va por encima del arte de fondo */
-.category-head, .dish, .subgroup-title{ position:relative; z-index:2; }
-
-/* Ilustraciones de fondo temáticas: dan ambiente a la sección y llenan
-   el aire que queda al final de la lista de platillos, en vez de dejar
-   un vacío. Nunca se recortan (siempre caben dentro de la sección) y
-   el blanco de su fondo se funde con la página gracias a multiply. */
-.bg-art{
-  position:absolute;
-  z-index:1;
-  opacity:0.9;
-  mix-blend-mode:multiply;
-  pointer-events:none;
-  height:auto;
-}
-.bg-art.pizza-bg{
-  width:min(260px, 36%);
-  right:0.5rem;
-  bottom:0.5rem;
-}
-.bg-art.bottle-bg{
-  width:min(170px, 24%);
-  right:0.5rem;
-  top:0.5rem;
-}
-.bg-art.glasses-bg{
-  width:min(190px, 27%);
-  right:0.5rem;
-  bottom:0.5rem;
-}
-.bg-art.grapes-bg{
-  width:min(180px, 25%);
-  left:0.5rem;
-  bottom:0.5rem;
-}
-
-/* Cuando una sección lleva arte de fondo, el texto le hace espacio
-   (columna más angosta) para que no se sienta apretado contra la
-   ilustración: esto es lo que genera el "aire" entre texto e imagen. */
-@media (min-width:821px){
-  .category.has-side-art .dish{ max-width:62%; }
-  #vino.has-side-art .dish{ margin:0 auto; }
-}
+/* Clearfix: contiene los floats dentro de su propia sección. */
+.category::after{ content:""; display:table; clear:both; }
 
 .category-head{
   text-align:center;
   margin-bottom:1.8rem;
+  clear:both;
 }
 
 .eyebrow{
@@ -271,44 +229,86 @@ main{
   text-transform:uppercase;
   color:var(--olive);
   margin:1.6rem 0 0.8rem;
+  clear:both;
 }
 
+/* Imagen "en flujo real": float, así el texto se angosta SOLO
+   mientras dura la altura de la imagen y nunca pasa por encima.
+   clear:both obliga a que una imagen nueva siempre empiece DESPUÉS
+   de que la anterior haya terminado por completo — así dos
+   ilustraciones nunca compiten a la misma altura. */
+.dish-art{
+  float:left;
+  clear:both;
+  width:clamp(230px, 46vw, 420px);
+  height:auto;
+  margin:0.3rem 1.4rem 0.8rem 0;
+  opacity:0.9;
+  mix-blend-mode:multiply;
+}
+.dish-art.right{
+  float:right;
+  margin:0.3rem 0 0.8rem 1.4rem;
+}
+.dish-art.large{
+  width:clamp(280px, 58vw, 520px);
+}
+
+/* Punto de corte explícito: obliga a que lo siguiente vuelva a ocupar
+   el ancho completo, sin importar si la imagen era más alta que el
+   platillo que acompaña. La línea divisoria vive AQUÍ (no en .dish),
+   así siempre cae debajo de lo más alto entre imagen y texto —
+   nunca atraviesa la ilustración. */
+.clear{
+  clear:both;
+  padding-bottom:0.85rem;
+  border-bottom:1px dotted var(--line);
+}
+.clear:last-child{ border-bottom:none; padding-bottom:0; }
+
 .dish{
-  display:grid;
-  grid-template-columns:1fr auto;
-  align-items:baseline;
-  column-gap:0.6rem;
-  padding:0.9rem 0;
+  padding:0.85rem 0;
   border-bottom:1px dotted var(--line);
   transition:transform 0.15s ease;
 }
 .dish:last-child{ border-bottom:none; }
 .dish:hover{ transform:translateX(3px); }
 
-.dish-name{
-  font-family:var(--serif);
-  font-weight:600;
-  font-size:1.02rem;
-  grid-column:1;
+/* Se aplica a CUALQUIER platillo que esté conviviendo con una imagen
+   flotada (no solo al primero) — evita que su propia línea divisoria
+   corte la ilustración mientras la imagen sigue activa. La línea real
+   la pone .clear, una sola vez, cuando el grupo completo termina. */
+.dish.grouped{
+  border-bottom:none;
+  padding-bottom:0.3rem;
+}
+
+.dish-line{
+  margin:0;
+  line-height:1.3;
 }
 .dish-price{
+  float:right;
   font-family:var(--serif);
   font-style:italic;
   font-weight:500;
   font-size:1rem;
   letter-spacing:0.01em;
   color:var(--brick-dark);
-  grid-column:2;
   white-space:nowrap;
+  margin-left:0.6rem;
+}
+.dish-name{
+  font-family:var(--serif);
+  font-weight:600;
+  font-size:1.02rem;
 }
 .dish-desc{
-  grid-column:1 / -1;
   font-size:0.88rem;
   line-height:1.5;
   color:var(--ink-70);
-  margin-top:0.25rem;
+  margin:0.25rem 0 0;
   font-style:italic;
-  max-width:60ch;
 }
 
 footer{
@@ -348,11 +348,12 @@ footer{
   .menu-nav button::before{ left:50%; top:auto; bottom:-0.35rem; transform:translateX(-50%) scale(0); }
   .menu-nav button.active::before{ transform:translateX(-50%) scale(1); }
   .logo-img{ width:120px; }
-  .bg-art{ opacity:0.5; }
-  .bg-art.pizza-bg{ width:34%; }
-  .bg-art.bottle-bg{ width:26%; }
-  .bg-art.glasses-bg{ width:28%; }
-  .bg-art.grapes-bg{ width:26%; }
+  .dish-art{
+    width:clamp(150px, 62vw, 260px);
+    margin:0.3rem 1rem 0.6rem 0;
+  }
+  .dish-art.right{ margin:0.3rem 0 0.6rem 1rem; }
+  .dish-art.large{ width:clamp(180px, 74vw, 320px); }
 
   /* La barra de categorías queda fija (sticky) arriba en móvil, así que
      cada sección necesita más aire arriba para no quedar tapada al saltar. */
