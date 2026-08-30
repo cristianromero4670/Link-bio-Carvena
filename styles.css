@@ -1,30 +1,50 @@
+/* ===================================================================
+   CASA IGO — Menú digital
+   Sistema: menú editorial gastronómico + grabado botánico vintage
+   =================================================================== */
+
 :root{
-  --cream:#FBF8F3;
-  --cream-2:#F3ECDF;
-  --ink:#4A3826;
-  --ink-70:rgba(74,56,38,0.68);
-  --ink-45:rgba(74,56,38,0.42);
-  --brick:#6B7A4F;
-  --brick-dark:#55613C;
-  --olive:#8A6F4B;
-  --gold:#D9B98A;
-  --line:rgba(74,56,38,0.14);
+  /* Color */
+  --bg:#FBF8F3;
+  --ink:#3A2C1E;
+  --ink-70:rgba(58,44,30,0.68);
+  --ink-45:rgba(58,44,30,0.42);
+  --green:#4F5D3A;
+  --green-dark:#3D4A2C;
+  --sepia:#8A6F4B;
+  --sand:#D9B98A;
+  --line:rgba(58,44,30,0.15);
+
+  /* Tipografía */
   --serif:'Fraunces', serif;
   --sans:'Work Sans', sans-serif;
   --mono:'IBM Plex Mono', monospace;
+
+  /* Layout */
+  --content-width: 1180px;
+  --text-measure: 860px;
+
+  /* Ritmo vertical (escala fluida, ver clamp por regla) */
+  --section-gap: clamp(4.5rem, 11vw, 9rem);
+  --head-gap: clamp(2.75rem, 6vw, 4.5rem);
+  --dish-gap: clamp(1.6rem, 3.2vw, 2.5rem);
 }
 
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;}
+html{
+  scroll-behavior:smooth;
+  overflow-x:clip;
+}
 body{
   margin:0;
-  background:var(--cream);
+  background:var(--bg);
   color:var(--ink);
   font-family:var(--sans);
   -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
 }
 
-/* subtle grain */
+/* Textura sutil de grano sobre toda la página */
 body::before{
   content:"";
   position:fixed; inset:0;
@@ -34,11 +54,11 @@ body::before{
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
-a{color:inherit; text-decoration:none;}
+a{ color:inherit; text-decoration:none; }
 
-/* ---------- Header ---------- */
+/* ================= HEADER ================= */
 .site-header{
-  padding:2.4rem 1.5rem 1.6rem;
+  padding:clamp(3rem, 8vw, 5.5rem) 1.5rem clamp(2rem, 4vw, 3rem);
   text-align:center;
   position:relative;
   z-index:2;
@@ -47,18 +67,19 @@ a{color:inherit; text-decoration:none;}
 .site-header::before{
   content:"";
   position:absolute;
-  top:-40%; left:50%;
-  width:340px; height:340px;
-  background:var(--gold);
+  top:-45%; left:50%;
+  width:clamp(360px, 42vw, 620px);
+  height:clamp(360px, 42vw, 620px);
+  background:var(--sand);
   opacity:0.35;
   border-radius:42% 58% 63% 37% / 47% 44% 56% 53%;
   transform:translateX(-50%);
   z-index:-1;
 }
 .logo-img{
-  width:150px;
+  width:clamp(140px, 14vw, 190px);
   height:auto;
-  margin:0 auto 0.4rem;
+  margin:0 auto 0.5rem;
   display:block;
   position:relative;
   z-index:2;
@@ -72,24 +93,25 @@ a{color:inherit; text-decoration:none;}
   mix-blend-mode:multiply;
   pointer-events:none;
   z-index:1;
+  opacity:0.9;
 }
 .corner-art.olivo{ left:-10px; }
 .corner-art.tomates{ right:-10px; }
 .tagline{
   font-family:var(--mono);
-  font-size:0.62rem;
-  letter-spacing:0.22em;
+  font-size:0.68rem;
+  letter-spacing:0.24em;
   text-transform:uppercase;
-  color:var(--olive);
-  margin:0.3rem 0 0;
+  color:var(--sepia);
+  margin:0.4rem 0 0;
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:0.5rem;
+  gap:0.6rem;
 }
 .tagline::before, .tagline::after{
   content:"•";
-  color:var(--brick);
+  color:var(--green);
   font-size:0.55rem;
 }
 .sr-only{
@@ -101,111 +123,96 @@ a{color:inherit; text-decoration:none;}
   white-space:nowrap;
   border:0;
 }
-.site-title{
-  font-family:var(--serif);
-  font-optical-sizing:auto;
-  font-weight:700;
-  font-size:clamp(2rem, 5vw, 2.8rem);
-  letter-spacing:0.01em;
-  margin:0;
-}
-/* ---------- Layout ---------- */
-.layout{
-  max-width:1080px;
-  margin:0 auto;
-  display:grid;
-  grid-template-columns:200px 1fr;
-  gap:2.5rem;
-  padding:0 1.5rem 4rem;
-  position:relative;
-  z-index:2;
-}
 
-/* ---------- Nav / index ---------- */
-.menu-nav{
+/* ================= NAV ================= */
+.site-nav{
   position:sticky;
-  top:1.5rem;
-  align-self:start;
+  top:0;
+  z-index:5;
   display:flex;
-  flex-direction:column;
-  gap:0.35rem;
-  border-left:1px solid var(--line);
-  padding-left:1rem;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:clamp(1.2rem, 3vw, 2.4rem);
+  padding:1rem 1.5rem;
+  background:var(--bg);
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
 }
-.menu-nav button{
+.site-nav button{
   all:unset;
   cursor:pointer;
   font-family:var(--sans);
-  font-size:0.82rem;
+  font-size:0.8rem;
   font-weight:600;
-  letter-spacing:0.03em;
+  letter-spacing:0.05em;
   text-transform:uppercase;
   color:var(--ink-45);
-  padding:0.45rem 0;
+  padding-bottom:0.5rem;
   position:relative;
   transition:color 0.2s ease;
 }
-.menu-nav button::before{
+.site-nav button::after{
   content:"";
   position:absolute;
-  left:-1.05rem; top:50%;
+  left:50%; bottom:0;
   width:6px; height:6px;
   border-radius:50%;
-  background:var(--brick);
-  transform:translateY(-50%) scale(0);
+  background:var(--green);
+  transform:translateX(-50%) scale(0);
   transition:transform 0.2s ease;
 }
-.menu-nav button.active{ color:var(--ink); }
-.menu-nav button.active::before{ transform:translateY(-50%) scale(1); }
-.menu-nav button:focus-visible{ outline:2px solid var(--brick); outline-offset:3px; }
+.site-nav button.active{ color:var(--ink); }
+.site-nav button.active::after{ transform:translateX(-50%) scale(1); }
+.site-nav button:focus-visible{ outline:2px solid var(--green); outline-offset:3px; }
 
-/* ---------- Sections ---------- */
+/* ================= CONTENEDOR EDITORIAL ================= */
+.content{
+  max-width:var(--content-width);
+  margin:0 auto;
+  padding:0 clamp(1.25rem, 5vw, 3rem);
+  position:relative;
+  z-index:2;
+}
 main{
-  min-width:0;
-  /* Garantiza suficiente espacio de scroll para que la ULTIMA sección
-     siempre pueda llegar hasta arriba del todo, sin importar qué tan
-     corta sea. Esto es lo que corrige el bug de navegación a "Vino". */
-  padding-bottom:45vh;
+  padding-bottom:45vh; /* espacio de scroll garantizado para la última sección */
 }
+
+/* ================= CATEGORÍAS ================= */
 .category{
-  padding-top:2.8rem;
-  scroll-margin-top:1.5rem;
+  margin-top:var(--section-gap);
+  position:relative;
 }
-.category:first-child{ padding-top:0; }
-/* Clearfix: contiene los floats dentro de su propia sección. */
+.category:first-child{ margin-top:clamp(2.5rem, 6vw, 4rem); }
 .category::after{ content:""; display:table; clear:both; }
 
 .category-head{
   text-align:center;
-  margin-bottom:1.8rem;
-  clear:both;
+  margin-bottom:var(--head-gap);
 }
-
 .eyebrow{
   font-family:var(--mono);
-  font-size:0.7rem;
-  letter-spacing:0.16em;
+  font-size:clamp(0.7rem, 0.9vw, 0.8rem);
+  letter-spacing:0.22em;
   text-transform:uppercase;
-  color:var(--brick);
+  color:var(--green);
   display:block;
-  margin-bottom:0.35rem;
+  margin-bottom:0.6rem;
 }
 .category-title{
   font-family:var(--serif);
   font-weight:600;
-  font-size:clamp(1.6rem, 5vw, 2.1rem);
-  margin:0 0 1rem;
+  font-size:clamp(2.6rem, 5.5vw, 4rem);
+  line-height:1.05;
+  margin:0 0 1.4rem;
 }
 
-/* Divisor ornamental centrado, como en el menú de referencia: dos
-   líneas punteadas cortas flanqueando el sprig de romero. */
 .divider{
   display:flex;
   align-items:center;
   justify-content:center;
-  gap:0.7rem;
+  gap:0.9rem;
   width:100%;
-  max-width:260px;
+  max-width:280px;
   margin:0 auto;
 }
 .divider::before, .divider::after{
@@ -215,7 +222,7 @@ main{
   border-top:1px dotted var(--line);
 }
 .divider img{
-  width:64px;
+  width:clamp(56px, 6vw, 76px);
   height:auto;
   flex-shrink:0;
   mix-blend-mode:multiply;
@@ -224,140 +231,186 @@ main{
 .subgroup-title{
   font-family:var(--sans);
   font-weight:600;
-  font-size:0.78rem;
-  letter-spacing:0.1em;
+  font-size:0.85rem;
+  letter-spacing:0.12em;
   text-transform:uppercase;
-  color:var(--olive);
-  margin:1.6rem 0 0.8rem;
+  color:var(--sepia);
+  margin:2.6rem 0 1.1rem;
   clear:both;
 }
+.subgroup-title:first-of-type{ margin-top:0; }
 
-/* Imagen "en flujo real": float, así el texto se angosta SOLO
-   mientras dura la altura de la imagen y nunca pasa por encima.
-   clear:both obliga a que una imagen nueva siempre empiece DESPUÉS
-   de que la anterior haya terminado por completo — así dos
-   ilustraciones nunca compiten a la misma altura. */
+/* ================= ILUSTRACIONES ================= */
+/* float + clear:both evita que dos ilustraciones compitan a la misma
+   altura y deja que el texto le haga espacio real (nunca se
+   superpone). El TAMAÑO se define más abajo, por ilustración
+   específica — nunca con un ancho único para todas: cada imagen tiene
+   una forma propia (alta y angosta, ancha y baja, diagonal...) y debe
+   ocupar su espacio de forma orgánica, no en una caja cuadrada. */
 .dish-art{
   float:left;
   clear:both;
-  width:clamp(230px, 46vw, 420px);
+  max-width:100%;
   height:auto;
-  margin:0.3rem 1.4rem 0.8rem 0;
-  opacity:0.9;
+  margin:0.4rem 2.75rem 1.25rem 0;
+  opacity:0.92;
   mix-blend-mode:multiply;
 }
 .dish-art.right{
   float:right;
-  margin:0.3rem 0 0.8rem 1.4rem;
-}
-.dish-art.large{
-  width:clamp(280px, 58vw, 520px);
+  margin:0.4rem 0 1.25rem 2.75rem;
 }
 
-/* Punto de corte explícito: obliga a que lo siguiente vuelva a ocupar
-   el ancho completo, sin importar si la imagen era más alta que el
-   platillo que acompaña. La línea divisoria vive AQUÍ (no en .dish),
-   así siempre cae debajo de lo más alto entre imagen y texto —
-   nunca atraviesa la ilustración. */
+/* Escala única para todas las ilustraciones — la misma proporción
+   para todas, sin protagonistas exageradas ni acentos diminutos.
+   El ANCHO o ALTO (según la orientación natural del archivo) se
+   mueve siempre dentro del mismo rango. */
+.art-sm, .art-md, .art-hero{ width:clamp(230px, 26vw, 300px); }
+
+/* --- Anchas y bajas: se dimensionan por ANCHO --- */
+img.dish-art[src$="ROMEROS.png"]{ width:clamp(230px, 26vw, 300px); }
+img[src$="OLIVO.png"]{ width:clamp(230px, 26vw, 300px); }
+img[src$="TOMATE.png"]{ width:clamp(230px, 26vw, 300px); }
+img[src$="TOMATES.png"].art-md{ width:clamp(230px, 26vw, 300px); }
+img[src$="COPAS.png"]{ width:clamp(230px, 26vw, 300px); }
+
+/* --- Altas y angostas: se dimensionan por ALTO, no por ancho, para
+   conservar su porte esbelto y natural, pero dentro de la MISMA
+   escala visual que las anchas (no más grandes que ellas). --- */
+img[src$="OLIVO2.jpeg"]{ width:auto; height:clamp(230px, 26vw, 300px); }
+img[src$="TOMATES.png"].art-hero{ width:auto; height:clamp(230px, 26vw, 300px); }
+img[src$="BOTELLA.png"]{ width:auto; height:clamp(230px, 26vw, 300px); }
+img[src$="UVA.png"]{ width:auto; height:clamp(230px, 26vw, 300px); }
+
+/* Sangrado editorial leve: un pequeño acento hacia el margen, igual
+   para todas — ya no hay "protagonistas" que sangren más que otras.
+   overflow-x:clip en html/body evita cualquier scroll horizontal. */
+.bleed-left{ margin-left:clamp(-1.25rem, -2vw, -0.5rem); }
+.bleed-right{ margin-right:clamp(-1.25rem, -2vw, -0.5rem); }
+
+/* Cierre de flotado: garantiza que la línea divisoria del grupo caiga
+   debajo de lo más alto entre imagen y texto — nunca corta la
+   ilustración — y da aire generoso antes del siguiente bloque. */
 .clear{
   clear:both;
-  padding-bottom:0.85rem;
+  padding-bottom:var(--dish-gap);
   border-bottom:1px dotted var(--line);
+  margin-bottom:clamp(0.5rem, 1.5vw, 1rem);
 }
-.clear:last-child{ border-bottom:none; padding-bottom:0; }
+.clear:last-child{ border-bottom:none; padding-bottom:0; margin-bottom:0; }
 
+/* ================= PLATILLOS ================= */
 .dish{
-  padding:0.85rem 0;
+  display:flow-root;
+  max-width:min(100%, 1000px);
+  padding-bottom:var(--dish-gap);
+  margin-bottom:var(--dish-gap);
   border-bottom:1px dotted var(--line);
-  transition:transform 0.15s ease;
 }
-.dish:last-child{ border-bottom:none; }
-.dish:hover{ transform:translateX(3px); }
+.dish:last-child{ border-bottom:none; padding-bottom:0; margin-bottom:0; }
 
-/* Se aplica a CUALQUIER platillo que esté conviviendo con una imagen
-   flotada (no solo al primero) — evita que su propia línea divisoria
-   corte la ilustración mientras la imagen sigue activa. La línea real
-   la pone .clear, una sola vez, cuando el grupo completo termina. */
+/* Cuando convive con una imagen flotada, cede su propia línea — la
+   pone .clear una sola vez, al final del grupo completo — y NO lleva
+   max-width: al ser flow-root, se ajusta solo al hueco real que deja
+   la imagen, sin dejar aire de más entre el texto y la ilustración. */
 .dish.grouped{
+  max-width:none;
   border-bottom:none;
-  padding-bottom:0.3rem;
+  padding-bottom:0.5rem;
+  margin-bottom:0.4rem;
 }
 
 .dish-line{
   margin:0;
-  line-height:1.3;
+  line-height:1.25;
 }
 .dish-price{
   float:right;
   font-family:var(--serif);
   font-style:italic;
   font-weight:500;
-  font-size:1rem;
+  font-size:clamp(1.2rem, 1.6vw, 1.5rem);
   letter-spacing:0.01em;
-  color:var(--brick-dark);
+  color:var(--green-dark);
   white-space:nowrap;
-  margin-left:0.6rem;
+  margin-left:1rem;
 }
 .dish-name{
   font-family:var(--serif);
   font-weight:600;
-  font-size:1.02rem;
+  font-size:clamp(1.35rem, 2vw, 1.65rem);
+  line-height:1.25;
 }
 .dish-desc{
-  font-size:0.88rem;
-  line-height:1.5;
+  font-size:clamp(1rem, 1.15vw, 1.1rem);
+  line-height:1.7;
   color:var(--ink-70);
-  margin:0.25rem 0 0;
+  margin:0.6rem 0 0;
   font-style:italic;
+  max-width:56ch;
 }
 
+/* ================= FOOTER ================= */
 footer{
   text-align:center;
-  padding:2.5rem 1.5rem 3rem;
+  padding:3rem 1.5rem 3.5rem;
   font-family:var(--mono);
-  font-size:0.7rem;
-  letter-spacing:0.1em;
+  font-size:0.72rem;
+  letter-spacing:0.12em;
   text-transform:uppercase;
   color:var(--ink-45);
   position:relative; z-index:2;
+  border-top:1px solid var(--line);
 }
 
-/* ---------- Mobile ---------- */
+/* ================= TABLET ================= */
+@media (max-width:1024px){
+  :root{ --content-width: 92vw; }
+  .art-sm, .art-md, .art-hero{ width:clamp(200px, 28vw, 280px); }
+  .bleed-left{ margin-left:-0.75rem; }
+  .bleed-right{ margin-right:-0.75rem; }
+}
+
+/* ================= MOBILE ================= */
 @media (max-width:820px){
-  .layout{
-    grid-template-columns:1fr;
-    padding:0 1.1rem 3rem;
-    gap:1.5rem;
-  }
-  .menu-nav{
-    position:sticky;
-    top:0;
-    flex-direction:row;
+  .site-nav{
+    justify-content:flex-start;
     overflow-x:auto;
-    border-left:none;
-    padding:0.8rem 0.2rem;
-    background:var(--cream);
-    border-bottom:1px solid var(--line);
     gap:1.4rem;
     -ms-overflow-style:none;
     scrollbar-width:none;
-    z-index:5;
   }
-  .menu-nav::-webkit-scrollbar{ display:none; }
-  .menu-nav button{ padding:0.3rem 0; flex:0 0 auto; }
-  .menu-nav button::before{ left:50%; top:auto; bottom:-0.35rem; transform:translateX(-50%) scale(0); }
-  .menu-nav button.active::before{ transform:translateX(-50%) scale(1); }
-  .logo-img{ width:120px; }
-  .dish-art{
-    width:clamp(150px, 62vw, 260px);
-    margin:0.3rem 1rem 0.6rem 0;
-  }
-  .dish-art.right{ margin:0.3rem 0 0.6rem 1rem; }
-  .dish-art.large{ width:clamp(180px, 74vw, 320px); }
+  .site-nav::-webkit-scrollbar{ display:none; }
 
-  /* La barra de categorías queda fija (sticky) arriba en móvil, así que
-     cada sección necesita más aire arriba para no quedar tapada al saltar. */
-  .category{ scroll-margin-top:4.2rem; }
+  .content{ padding:0 1.1rem; }
+
+  .category{ scroll-margin-top:4rem; }
+
+  .logo-img{ width:110px; }
+  .corner-art{ opacity:0.6; }
+
+  .category-title{ font-size:clamp(2.1rem, 9vw, 2.6rem); }
+
+  .dish{ max-width:100%; }
+  .dish-name{ font-size:1.15rem; }
+  .dish-desc{ font-size:0.95rem; max-width:none; }
+  .dish-price{ font-size:1.05rem; }
+
+  .art-sm, .art-md, .art-hero{ width:clamp(150px, 44vw, 210px); margin:0.3rem 1rem 0.7rem 0; }
+  .dish-art.right{ margin:0.3rem 0 0.7rem 1rem; }
+
+  img.dish-art[src$="ROMEROS.png"]{ width:clamp(150px, 44vw, 210px); }
+  img[src$="OLIVO.png"]{ width:clamp(150px, 44vw, 210px); }
+  img[src$="TOMATE.png"]{ width:clamp(150px, 44vw, 210px); }
+  img[src$="TOMATES.png"].art-md{ width:clamp(150px, 44vw, 210px); }
+  img[src$="COPAS.png"]{ width:clamp(150px, 44vw, 210px); }
+
+  img[src$="OLIVO2.jpeg"]{ width:auto; height:clamp(150px, 44vw, 210px); }
+  img[src$="TOMATES.png"].art-hero{ width:auto; height:clamp(150px, 44vw, 210px); }
+  img[src$="BOTELLA.png"]{ width:auto; height:clamp(150px, 44vw, 210px); }
+  img[src$="UVA.png"]{ width:auto; height:clamp(150px, 44vw, 210px); }
+
+  .bleed-left, .bleed-right{ margin-left:0; margin-right:0; }
 }
 
 @media (prefers-reduced-motion:reduce){
