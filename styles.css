@@ -169,7 +169,7 @@ a{ color:inherit; text-decoration:none; }
 .content{
   max-width:var(--content-width);
   margin:0 auto;
-  padding:0 clamp(1.25rem, 5vw, 3rem);
+  padding:0 clamp(2rem, 7vw, 5rem);
   position:relative;
   z-index:2;
 }
@@ -273,11 +273,14 @@ img[src$="OLIVO.png"]{ width:clamp(230px, 26vw, 300px); }
 img[src$="TOMATE.png"]{ width:clamp(230px, 26vw, 300px); }
 img[src$="TOMATES.png"].art-md{ width:clamp(230px, 26vw, 300px); }
 img[src$="COPAS.png"]{ width:clamp(230px, 26vw, 300px); }
+img[src$="ALBAHACA.png"]{ width:clamp(230px, 26vw, 300px); }
+img[src$="CHAMPI.png"]{ width:clamp(230px, 26vw, 300px); }
+img[src$="WAFFLE.png"]{ width:clamp(230px, 26vw, 300px); }
 
 /* --- Altas y angostas: se dimensionan por ALTO, no por ancho, para
    conservar su porte esbelto y natural, pero dentro de la MISMA
    escala visual que las anchas (no más grandes que ellas). --- */
-img[src$="OLIVO2.jpeg"]{ width:auto; height:clamp(230px, 26vw, 300px); }
+img[src$="OLIVO2.png"]{ width:auto; height:clamp(230px, 26vw, 300px); }
 img[src$="TOMATES.png"].art-hero{ width:auto; height:clamp(230px, 26vw, 300px); }
 img[src$="BOTELLA.png"]{ width:auto; height:clamp(230px, 26vw, 300px); }
 img[src$="UVA.png"]{ width:auto; height:clamp(230px, 26vw, 300px); }
@@ -404,8 +407,11 @@ footer{
   img[src$="TOMATE.png"]{ width:clamp(150px, 44vw, 210px); }
   img[src$="TOMATES.png"].art-md{ width:clamp(150px, 44vw, 210px); }
   img[src$="COPAS.png"]{ width:clamp(150px, 44vw, 210px); }
+  img[src$="ALBAHACA.png"]{ width:clamp(150px, 44vw, 210px); }
+  img[src$="CHAMPI.png"]{ width:clamp(150px, 44vw, 210px); }
+  img[src$="WAFFLE.png"]{ width:clamp(150px, 44vw, 210px); }
 
-  img[src$="OLIVO2.jpeg"]{ width:auto; height:clamp(150px, 44vw, 210px); }
+  img[src$="OLIVO2.png"]{ width:auto; height:clamp(150px, 44vw, 210px); }
   img[src$="TOMATES.png"].art-hero{ width:auto; height:clamp(150px, 44vw, 210px); }
   img[src$="BOTELLA.png"]{ width:auto; height:clamp(150px, 44vw, 210px); }
   img[src$="UVA.png"]{ width:auto; height:clamp(150px, 44vw, 210px); }
