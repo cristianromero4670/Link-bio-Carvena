@@ -1,28 +1,119 @@
 <!doctype html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Casa Igo | Bienvenida</title>
-    <link rel="stylesheet" href="casa igo.css" />
-  </head>
-  <body>
-    <main class="hero" aria-label="Página de recepción de clientes">
-      <div class="overlay" aria-hidden="true"></div>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F7F3EA">
+  <meta name="description" content="CARVENA — Horno Diverso. Fuego, ingredientes y cocina sin etiquetas.">
+  <title>CARVENA — Horno Diverso</title>
 
-      <section class="content-card">
-        <p class="eyebrow">Bienvenidos a</p>
-        <h1>Casa Igo</h1>
-        <p class="subtitle">Elige cómo quieres conocernos</p>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Inter:wght@400;500;600&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main class="page-shell">
+    <div class="content-stack">
+      <section class="link-card" aria-labelledby="brand-name">
+        <div class="botanical botanical--left" aria-hidden="true"></div>
+        <div class="botanical botanical--right" aria-hidden="true"></div>
 
-        <nav class="quick-links" aria-label="Enlaces principales">
-          <a class="btn" href="https://drive.google.com/file/d/1U2GbShvlZf2ZRh_BGxACYIzYL39bJq3s/view?usp=sharing" target="_blank" rel="noopener noreferrer">Ver menú</a>
-          <a class="btn" href="https://wa.me/523334401647" target="_blank" rel="noopener noreferrer">WhatsApp</a>
-          <a class="btn" href="https://www.instagram.com/casa_igo_?igsh=MXExbTFnNXk2Y2ZwNw==" target="_blank" rel="noopener noreferrer">Instagram</a>
-          <a class="btn" href="https://maps.app.goo.gl/jbN92F5cQNgAK1iM8" target="_blank" rel="noopener noreferrer">Google Maps</a>
+        <header class="brand reveal">
+          <img class="brand__logo" src="assets/logo-carvena.png" alt="CARVENA — Horno Diverso">
+          <h1 id="brand-name" class="sr-only">CARVENA — Horno Diverso</h1>
+          <p class="brand__tagline">Fuego, ingredientes y cocina sin etiquetas.</p>
+        </header>
+
+        <nav class="actions reveal" aria-label="Acciones principales">
+          <a class="action action--primary" data-link="menu" href="assets/menu-carvena.pdf" target="_blank" rel="noopener">
+            <span class="action__copy">
+              <strong>MENÚ</strong>
+              <small>Conoce nuestra cocina</small>
+            </span>
+          </a>
+
+          <a class="action action--secondary" data-link="reservation" href="#">
+            <span class="action__copy">
+              <strong>RESERVAR MESA</strong>
+              <small>Planea tu visita</small>
+            </span>
+          </a>
         </nav>
+
+        <nav class="social-links reveal" aria-label="Ubicación, contacto y redes sociales">
+          <a data-link="mapsLocation" href="#" target="_blank" rel="noopener" aria-label="Ver CARVENA en Google Maps">
+            <span class="material-symbols-outlined social-links__icon" aria-hidden="true">location_on</span>
+            <span class="social-links__label">Ubicación</span>
+          </a>
+
+          <a data-link="whatsapp" href="#" target="_blank" rel="noopener" aria-label="WhatsApp de CARVENA">
+            <i class="fa-brands fa-whatsapp social-links__icon" aria-hidden="true"></i>
+            <span class="social-links__label">WhatsApp</span>
+          </a>
+
+          <a data-link="instagram" href="#" target="_blank" rel="noopener" aria-label="Instagram de CARVENA">
+            <i class="fa-brands fa-instagram social-links__icon" aria-hidden="true"></i>
+            <span class="social-links__label">Instagram</span>
+          </a>
+
+          <a data-link="tiktok" href="#" target="_blank" rel="noopener" aria-label="TikTok de CARVENA">
+            <i class="fa-brands fa-tiktok social-links__icon" aria-hidden="true"></i>
+            <span class="social-links__label">TikTok</span>
+          </a>
+
+          <a data-link="facebook" href="#" target="_blank" rel="noopener" aria-label="Facebook de CARVENA">
+            <i class="fa-brands fa-facebook-f social-links__icon" aria-hidden="true"></i>
+            <span class="social-links__label">Facebook</span>
+          </a>
+        </nav>
+
+        <p class="signature reveal">HORNO · FUEGO · MESA</p>
       </section>
-    </main>
-    <script src="casa igo.js"></script>
-  </body>
+
+      <section class="link-card review-card reveal" aria-labelledby="review-title">
+        <header class="review-card__header">
+          <p class="review-card__eyebrow">TU EXPERIENCIA IMPORTA</p>
+          <h2 id="review-title">¿Disfrutaste CARVENA?</h2>
+          <p>Comparte tu experiencia y ayúdanos a seguir encendiendo el horno.</p>
+        </header>
+
+        <div class="review-card__media carousel" aria-label="Galería de CARVENA">
+          <div class="carousel__track">
+            <figure class="carousel__slide is-active">
+              <img src="assets/carr-1.jpeg" alt="Experiencia CARVENA — imagen 1" loading="lazy">
+            </figure>
+            <figure class="carousel__slide">
+              <img src="assets/carr-2.jpeg" alt="Experiencia CARVENA — imagen 2" loading="lazy">
+            </figure>
+            <figure class="carousel__slide">
+              <img src="assets/carr-3.jpeg" alt="Experiencia CARVENA — imagen 3" loading="lazy">
+            </figure>
+          </div>
+
+          <button class="carousel__control carousel__control--prev" type="button" aria-label="Imagen anterior">
+            <span class="material-symbols-outlined" aria-hidden="true">chevron_left</span>
+          </button>
+          <button class="carousel__control carousel__control--next" type="button" aria-label="Imagen siguiente">
+            <span class="material-symbols-outlined" aria-hidden="true">chevron_right</span>
+          </button>
+
+          <div class="carousel__dots" aria-label="Seleccionar imagen">
+            <button class="carousel__dot is-active" type="button" aria-label="Ver imagen 1" aria-current="true"></button>
+            <button class="carousel__dot" type="button" aria-label="Ver imagen 2"></button>
+            <button class="carousel__dot" type="button" aria-label="Ver imagen 3"></button>
+          </div>
+        </div>
+
+        <a class="review-card__button" data-link="mapsReview" href="#" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined" aria-hidden="true">rate_review</span>
+          <span>DEJAR UNA RESEÑA EN GOOGLE</span>
+        </a>
+      </section>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
 </html>
