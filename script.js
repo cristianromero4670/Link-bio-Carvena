@@ -7,7 +7,6 @@ const LINKS = {
   mapsLocation: "https://g.page/r/Ce-PgtqSCWNdEAE/review",
   mapsReview: "https://g.page/r/Ce-PgtqSCWNdEAE/review",
 
-
   /* Redes sociales */
   tiktok: "https://www.tiktok.com/@carvena_horno?_r=1&_t=ZS-9A5b5WzXrRX",
   facebook: "https://www.facebook.com/share/19Kzio41ys/?mibextid=wwXIfr",

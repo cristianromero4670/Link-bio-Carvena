@@ -537,65 +537,144 @@ a:focus-visible,
 }
 
 @media (max-width: 520px) {
-  /* En móvil evitamos problemas de background-attachment: fixed de algunos navegadores. */
+  html,
+  body {
+    width: 100%;
+    min-height: 100%;
+    background: transparent;
+  }
+
+  /*
+    Fondo exclusivo para móvil. Se coloca en una capa fija independiente
+    para que no se desplace junto con las tarjetas al hacer scroll.
+  */
   body::before {
     content: "";
     position: fixed;
-    inset: 0;
-    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 100svh;
+    z-index: -2;
     background-image: url("assets/background-mov.jpeg");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-  }
-
-  html,
-  body {
-    background-color: transparent;
-  }
-
-  body {
-    background-image: none;
+    transform: translateZ(0);
+    pointer-events: none;
   }
 
   .page-shell {
-    padding-inline: 14px;
+    width: 100%;
+    min-height: 100dvh;
+    padding:
+      max(18px, env(safe-area-inset-top))
+      0
+      max(38px, env(safe-area-inset-bottom));
   }
 
+  /*
+    Las tarjetas ya no ocupan todo el ancho del teléfono.
+    Queda visible el fondo a ambos lados y toda la composición se centra.
+  */
   .content-stack {
-    padding-top: 14px;
-    gap: 18px;
+    width: calc(100% - 40px);
+    max-width: 390px;
+    margin-inline: auto;
+    padding-top: 18px;
+    gap: 22px;
   }
 
   .link-card,
   .review-card {
     width: 100%;
+    border-radius: 18px;
+    padding: 18px 16px;
+    gap: 14px;
+    background: rgba(247, 243, 234, 0.88);
+    box-shadow: 0 12px 30px rgba(41, 39, 34, 0.14);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
   }
-}
 
-@media (max-width: 520px) {
+  .brand__logo {
+    width: min(100%, 315px);
+  }
+
+  .brand__tagline {
+    font-size: 16px;
+  }
+
+  .action {
+    min-height: 60px;
+    padding: 10px 14px;
+  }
+
+  .action strong {
+    font-size: 19px;
+  }
+
+  .social-links {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2px;
+    padding: 4px;
+    overflow: visible;
+  }
+
+  .social-links a {
+    min-width: 0;
+    min-height: 54px;
+    padding: 6px 2px;
+    border: 0;
+  }
+
+  .social-links__label {
+    max-width: 100%;
+    font-size: 7px;
+    letter-spacing: 0.035em;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .review-card__header h2 {
+    font-size: clamp(25px, 8vw, 29px);
+  }
+
   .review-card__media {
-    width: min(100%, 340px);
+    width: 100%;
+    max-width: 340px;
   }
 
   .carousel__control {
     width: 36px;
     height: 36px;
   }
+
+  .review-card__button {
+    min-height: 56px;
+    padding-inline: 12px;
+    font-size: 9px;
+  }
 }
 
 @media (max-width: 390px) {
-  .page-shell {
-    padding-inline: 14px;
+  .content-stack {
+    width: calc(100% - 32px);
   }
 
-  .action strong {
-    font-size: 18px;
+  .link-card,
+  .review-card {
+    padding: 16px 14px;
   }
 
-  .social-links__label {
-    font-size: 7px;
-    letter-spacing: 0.04em;
+  .brand__logo {
+    width: min(100%, 290px);
+  }
+
+  .social-links__icon {
+    font-size: 17px;
   }
 }
 
