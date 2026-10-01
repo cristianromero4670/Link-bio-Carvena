@@ -537,59 +537,71 @@ a:focus-visible,
 }
 
 @media (max-width: 520px) {
-  html,
-  body {
+  /*
+   * iOS/Safari cambia la altura visual del viewport al ocultar/mostrar
+   * sus barras. Usamos 100lvh para que la capa de fondo no cambie de
+   * tamaño durante el scroll y evitamos background-attachment: fixed.
+   */
+  html {
     width: 100%;
     min-height: 100%;
-    background: transparent;
+    background: #d8c7ae;
   }
 
-  /*
-    Fondo exclusivo para móvil. Se coloca en una capa fija independiente
-    para que no se desplace junto con las tarjetas al hacer scroll.
-  */
+  body {
+    position: relative;
+    width: 100%;
+    min-width: 100%;
+    min-height: 100%;
+    margin: 0;
+    overflow-x: hidden;
+    background: #d8c7ae;
+  }
+
   body::before {
     content: "";
     position: fixed;
+    z-index: 0;
     top: 0;
     right: 0;
-    bottom: 0;
+    bottom: auto;
     left: 0;
-    width: 100vw;
-    height: 100svh;
-    z-index: -2;
+    width: 100%;
+    height: 100vh;
+    height: 100lvh;
+    background-color: #d8c7ae;
     background-image: url("assets/background-mov.jpeg");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    transform: translateZ(0);
     pointer-events: none;
   }
 
   .page-shell {
+    position: relative;
+    z-index: 1;
     width: 100%;
-    min-height: 100dvh;
+    min-height: 100vh;
+    min-height: 100svh;
     padding:
-      max(18px, env(safe-area-inset-top))
+      max(20px, env(safe-area-inset-top))
       0
-      max(38px, env(safe-area-inset-bottom));
+      max(42px, env(safe-area-inset-bottom));
+    background: transparent;
   }
 
-  /*
-    Las tarjetas ya no ocupan todo el ancho del teléfono.
-    Queda visible el fondo a ambos lados y toda la composición se centra.
-  */
   .content-stack {
-    width: calc(100% - 40px);
+    width: 86vw;
     max-width: 390px;
-    margin-inline: auto;
+    margin: 0 auto;
     padding-top: 18px;
-    gap: 22px;
+    gap: 24px;
   }
 
   .link-card,
   .review-card {
     width: 100%;
+    margin-inline: auto;
     border-radius: 18px;
     padding: 18px 16px;
     gap: 14px;
@@ -661,7 +673,8 @@ a:focus-visible,
 
 @media (max-width: 390px) {
   .content-stack {
-    width: calc(100% - 32px);
+    width: 88vw;
+    max-width: 350px;
   }
 
   .link-card,
@@ -690,79 +703,5 @@ a:focus-visible,
   .reveal {
     opacity: 1;
     transform: none;
-  }
-}
-
-/* =========================================================
-   AJUSTE FINAL MÓVIL: fondo a pantalla completa + tarjetas
-   centradas con aire lateral.
-   ========================================================= */
-@media (max-width: 520px) {
-  html {
-    width: 100%;
-    min-height: 100%;
-    background-color: #d8c7ae;
-    background-image: url("assets/background-mov.jpeg");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-  }
-
-  body {
-    width: 100%;
-    min-width: 100%;
-    min-height: 100dvh;
-    overflow-x: hidden;
-    background: transparent;
-  }
-
-  /* Capa fija real: permanece detrás de todo el contenido durante el scroll. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    width: 100dvw;
-    height: 100dvh;
-    min-width: 100%;
-    min-height: 100%;
-    z-index: -1;
-    background-color: #d8c7ae;
-    background-image: url("assets/background-mov.jpeg");
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    pointer-events: none;
-  }
-
-  .page-shell {
-    width: 100%;
-    min-height: 100dvh;
-    padding:
-      max(20px, env(safe-area-inset-top))
-      0
-      max(42px, env(safe-area-inset-bottom));
-    background: transparent;
-  }
-
-  .content-stack {
-    width: 86vw;
-    max-width: 390px;
-    margin: 0 auto;
-    padding-top: 18px;
-    gap: 24px;
-  }
-
-  .link-card,
-  .review-card {
-    width: 100%;
-    margin-inline: auto;
-  }
-}
-
-@media (max-width: 390px) {
-  .content-stack {
-    width: 88vw;
-    max-width: 350px;
   }
 }
