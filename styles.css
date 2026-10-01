@@ -692,3 +692,77 @@ a:focus-visible,
     transform: none;
   }
 }
+
+/* =========================================================
+   AJUSTE FINAL MÓVIL: fondo a pantalla completa + tarjetas
+   centradas con aire lateral.
+   ========================================================= */
+@media (max-width: 520px) {
+  html {
+    width: 100%;
+    min-height: 100%;
+    background-color: #d8c7ae;
+    background-image: url("assets/background-mov.jpeg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+  }
+
+  body {
+    width: 100%;
+    min-width: 100%;
+    min-height: 100dvh;
+    overflow-x: hidden;
+    background: transparent;
+  }
+
+  /* Capa fija real: permanece detrás de todo el contenido durante el scroll. */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    width: 100dvw;
+    height: 100dvh;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+    background-color: #d8c7ae;
+    background-image: url("assets/background-mov.jpeg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    pointer-events: none;
+  }
+
+  .page-shell {
+    width: 100%;
+    min-height: 100dvh;
+    padding:
+      max(20px, env(safe-area-inset-top))
+      0
+      max(42px, env(safe-area-inset-bottom));
+    background: transparent;
+  }
+
+  .content-stack {
+    width: 86vw;
+    max-width: 390px;
+    margin: 0 auto;
+    padding-top: 18px;
+    gap: 24px;
+  }
+
+  .link-card,
+  .review-card {
+    width: 100%;
+    margin-inline: auto;
+  }
+}
+
+@media (max-width: 390px) {
+  .content-stack {
+    width: 88vw;
+    max-width: 350px;
+  }
+}
