@@ -1,14 +1,12 @@
 /* CARVENA — enlaces centralizados para facilitar futuros cambios. */
 const LINKS = {
   menu: "assets/menu-carvena.pdf",
-  reservation: "#REEMPLAZAR_URL_RESERVACIONES",
+  reservation: "https://wa.me/523334401647",
 
   /* Google Maps / reseñas */
   mapsLocation: "https://g.page/r/Ce-PgtqSCWNdEAE/review",
   mapsReview: "https://g.page/r/Ce-PgtqSCWNdEAE/review",
 
-  /* WhatsApp: +52 33 3440 1647 */
-  whatsapp: "https://wa.me/523334401647",
 
   /* Redes sociales */
   tiktok: "https://www.tiktok.com/@carvena_horno?_r=1&_t=ZS-9A5b5WzXrRX",
